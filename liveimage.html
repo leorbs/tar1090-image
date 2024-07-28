@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Viewer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    <script>
+        function refreshImage() {
+            const img = document.getElementById('screenshot');
+            const timestamp = new Date().getTime();
+            img.src = 'screenshot.png?t=' + timestamp;
+        }
+
+        window.onload = function() {
+            setInterval(refreshImage, 10000);
+            refreshImage();
+        };
+    </script>
+</head>
+<body>
+    <img id="screenshot" src="" alt="Latest Screenshot">
+</body>
+</html>
