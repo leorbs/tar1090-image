@@ -11,15 +11,15 @@ const puppeteer = require('puppeteer');
     await page.goto('http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons');
 
     // Function to take a screenshot
-    const takeScreenshot = async (count) => {
+    const takeScreenshot = async () => {
         await page.screenshot({ path: './screenshot.png' });
     };
 
     // Take an initial screenshot
-    await takeScreenshot(count);
+    await takeScreenshot();
 
     // Take a screenshot every 10 seconds
     setInterval(async () => {
-        await takeScreenshot(count);
+        await takeScreenshot();
     }, 10000);
 })();
