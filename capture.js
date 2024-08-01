@@ -11,10 +11,14 @@ const puppeteer = require('puppeteer');
     await page.goto('http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&mapContrast=-0.1&mapDim=-0.1&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7');
 
 
+    // Function to escape special characters in CSS selectors
+    function escapeCssSelector(selector) {
+        return selector.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|/@])/g, '\\$1');
+    }
+
     // Function to uncheck a checkbox based on the label text
     async function uncheckCheckbox(labelText) {
         // Find the label element by its text content
-        const labelSelector = `label:contains("${labelText}")`;
         const labelHandle = await page.evaluateHandle((text) => {
             const elements = document.querySelectorAll('label');
             for (let element of elements) {
@@ -29,8 +33,9 @@ const puppeteer = require('puppeteer');
             // Get the 'for' attribute value from the label
             const checkboxId = await page.evaluate(label => label.htmlFor, labelHandle);
 
-            // Create the selector for the checkbox using the 'for' attribute value
-            const checkboxSelector = `#${checkboxId}`;
+            // Escape the checkbox ID for use in a CSS selector
+            const escapedCheckboxId = escapeCssSelector(checkboxId);
+            const checkboxSelector = `#${escapedCheckboxId}`;
 
             // Uncheck the checkbox if it is checked
             const isChecked = await page.$eval(checkboxSelector, checkbox => checkbox.checked);
