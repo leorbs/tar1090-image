@@ -11,12 +11,23 @@ const puppeteer = require('puppeteer');
     await page.goto('http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&mapContrast=-0.1&mapDim=-0.1&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7');
 
 
+    // Function to uncheck a checkbox based on the label text
     async function uncheckCheckbox(labelText) {
-        const checkboxLabel = await page.$x(`//label[text()='${labelText}']`);
+        // Find the label element by its text content
+        const labelSelector = `label:contains("${labelText}")`;
+        const labelHandle = await page.evaluateHandle((text) => {
+            const elements = document.querySelectorAll('label');
+            for (let element of elements) {
+                if (element.textContent.trim() === text) {
+                    return element;
+                }
+            }
+            return null;
+        }, labelText);
 
-        if (checkboxLabel.length > 0) {
+        if (labelHandle) {
             // Get the 'for' attribute value from the label
-            const checkboxId = await (await checkboxLabel[0].getProperty('htmlFor')).jsonValue();
+            const checkboxId = await page.evaluate(label => label.htmlFor, labelHandle);
 
             // Create the selector for the checkbox using the 'for' attribute value
             const checkboxSelector = `#${checkboxId}`;
