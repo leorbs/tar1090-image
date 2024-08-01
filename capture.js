@@ -13,7 +13,7 @@ const puppeteer = require('puppeteer');
 
     // Function to escape special characters in CSS selectors
     function escapeCssSelector(selector) {
-        return selector.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|/@])/g, '\\$1');
+        return selector.replace(/-/g, '\\-');
     }
 
     // Function to uncheck a checkbox based on the label text
