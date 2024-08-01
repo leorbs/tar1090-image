@@ -12,7 +12,7 @@ const puppeteer = require('puppeteer');
 
     // Function to take a screenshot
     const takeScreenshot = async () => {
-        await page.screenshot({ path: './screenshot.png' });
+        await page.screenshot({ path: '/opt/tar1090-image/screenshot.png' });
     };
 
     // Take an initial screenshot

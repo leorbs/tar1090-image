@@ -29,8 +29,10 @@ sudo apt install -y libnss3 libatk-bridge2.0-0 libxcomposite1 libxrandr2 libxdam
 
 create symlinks from the mounted folder
 ```shell
-ln -sf /home/leo/tar1090-image/liveimage.html /var/www/html/liveimage.html
-ln -sf /home/leo/tar1090-image/screenshot.png /var/www/html/screenshot.png
+mkdir /opt/tar1090-image
+chmod 777 /opt/tar1090-image
+ln -sf /opt/tar1090-image/liveimage.html /var/www/html/liveimage.html
+ln -sf /opt/tar1090-image/screenshot.png /var/www/html/screenshot.png
 ```
 
 
