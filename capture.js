@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
 
+const tarUrl = 'http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7';
+const screenshotPath = '/opt/tar1090-image/screenshot.png';
+
 (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -8,7 +11,7 @@ const puppeteer = require('puppeteer');
     const height = 1024;  // Desired height
     await page.setViewport({ width, height });
 
-    await page.goto('http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&mapContrast=-0.1&mapDim=-0.1&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7');
+    await page.goto(tarUrl);
 
 
       // Function to uncheck a checkbox based on label text
@@ -30,7 +33,7 @@ const puppeteer = require('puppeteer');
 
     // Function to take a screenshot
     const takeScreenshot = async () => {
-        await page.screenshot({ path: '/opt/tar1090-image/screenshot.png' });
+        await page.screenshot({ path: screenshotPath });
     };
 
     // Take an initial screenshot
