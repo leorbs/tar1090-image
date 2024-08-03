@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
-const tarUrl = 'http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7';
-const screenshotPath = '/opt/tar1090-image/screenshot.png';
+const tarUrl = 'http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&outlineWidth=4&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7&mapContrast=-0.1&mapDim=-0.1';
+const screenshotPath = '/media/screenshot.png';
 
 (async () => {
     const browser = await puppeteer.launch();

@@ -1,16 +1,22 @@
 # image creator for tar1090
 
+TODO: 
+- Make screen turn black and white
+- Fullscreen with a click on midori?
 
-WORK IN PROGRESS
-
-change url in the capture.js \
-adjust screenshot size
+prequeisites:
+- only works like this on 64 bit ARM because of the cromium restrictions 
+- on ARM 32 bit systems there is no chromium browser available 
+- on x68 systems there ist the  
 
 install nodejs >18 on debian \
 [nodesource link](https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-22)
 
-
+### capture setup
 ```shell
+# clone this repository into /opt/
+# the path should be /opt/tar1090-image
+
 apt install chromium
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export CHROME_PATH=/usr/bin/chromium
@@ -20,26 +26,37 @@ chmod +x runCapture.sh
 ./runCapture.sh
 ```
 
+modify ```runCapture.sh``` to supply the correct env variables.
 
-create symlinks from the mounted folder
+
+### symlinks to http folder
 ```shell
-mkdir /opt/tar1090-image
-chmod 777 /opt/tar1090-image
+chmod 755 /opt/tar1090-image
 ln -sf /opt/tar1090-image/liveimage.html /var/www/html/liveimage.html
-ln -sf /opt/tar1090-image/screenshot.png /var/www/html/screenshot.png
-cp ./liveimage.html /opt/tar1090-image/
+ln -sf /opt/tar1090-image/media/screenshot.png /var/www/html/screenshot.png
+chmod 666 screenshot.png
 ```
 
-adjust capture.js
-change ```tarUrl``` and ```screenshotPath```
-
-
-use crontab to create a startupjob for the raspberry
+### create ramdisk to prevent writing of the media file to disk
 ```shell
-crontab -e
+mkdir /opt/tar1090-image/media
 ```
 
-add the following
 ```
-@reboot /home/leo/runCapture.sh
+none /opt/tar1090-image/media tmpfs nodev,nosuid,noexec,nodiratime,size=20M 0 0
+```
+
+### adjust capture.js
+change ```tarUrl``` and ```screenshotPath``` as needed \
+adjust screenshot size as needed
+
+
+## use rc.local to create a startupjob
+```shell
+sudo nano /etc/rc.local
+```
+
+add the following before ```exit 0```
+```
+sudo runuser -l leo -c 'cd /opt/tar1090-image && ./runCapture.sh' &
 ```
