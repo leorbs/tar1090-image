@@ -25,9 +25,23 @@
             img.src = 'screenshot.png?t=' + timestamp;
         }
 
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen().catch((err) => {
+                    console.log(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
+                });
+            }
+        }
+
         window.onload = function() {
             setInterval(refreshImage, 10000);
             refreshImage();
+            const img = document.getElementById('screenshot');
+            img.addEventListener('click', toggleFullScreen);
         };
     </script>
 </head>
