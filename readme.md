@@ -14,10 +14,12 @@ This setup is designed to work on 64-bit ARM systems due to Chromium restriction
 - On ARM 32-bit systems, Chromium browser is not available.
 - On x86 systems, the normal Chrome installation from Puppeteer can be used without setting environment variables.
 
-Install Node.js >= 18 on Debian/Raspian \
-[nodesource link](https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-22)
+That means it will work if you run you Raspberry Pi on 64 Bit Raspian.
 
 ## Main Capture Setup
+
+1. Install Node.js >= 18 on Debian/Raspian \
+    [nodesource link](https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-22)
 
 1. Clone this repository into `/opt/`:
    ```shell
