@@ -37,8 +37,18 @@
             }
         }
 
+        function refreshEpaper() {
+            const img = document.getElementById('screenshot');
+            img.style.filter = 'invert(1)';
+            setTimeout(() => {
+                img.style.filter = 'invert(0)';
+                refreshImage();
+            }, 500);
+        }
+
         window.onload = function() {
             setInterval(refreshImage, 10000);
+            setInterval(refreshEpaper, 1800000);
             refreshImage();
             const img = document.getElementById('screenshot');
             img.addEventListener('click', toggleFullScreen);
