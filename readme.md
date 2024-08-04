@@ -41,6 +41,7 @@ mkdir /opt/tar1090-image/media
 
 ```
 none /opt/tar1090-image/media tmpfs nodev,nosuid,noexec,nodiratime,size=20M 0 0
+tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=50M 0 0
 ```
 
 ### adjust capture.js
@@ -57,3 +58,12 @@ add the following before ```exit 0```
 ```
 sudo runuser -l leo -c 'cd /opt/tar1090-image && ./runCapture.sh' &
 ```
+
+### Hints
+
+To test if there are any regular diskusages, I used the following.
+```shell
+sudo fatrace -o /tmp/trace -s 60
+cat /tmp/trace | grep " W "
+```
+

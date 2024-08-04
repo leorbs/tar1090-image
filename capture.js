@@ -6,7 +6,13 @@ const width = 768;
 const height = 1024;
 
 const startBrowser = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+      args: [
+        '--disk-cache-dir=/dev/null',
+        '--disk-cache-size=1',
+        '--user-data-dir=/dev/null'
+      ]
+});
   const page = await browser.newPage();
 
   // Set the viewport size
