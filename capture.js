@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const tarUrl = 'http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&outlineWidth=3&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7&mapContrast=-0.1&mapDim=-0.1';
+const tarUrl = 'http://192.168.178.53/tar1090/?nowebgl&hideSideBar&hideButtons&outlineWidth=3&outlineColor=ffffff&monochromeMarkers=000000&scale=1.7&mapContrast=-0.05&mapDim=-0.05';
 const screenshotPath = './media/screenshot.png';
 const width = 768;
 const height = 1024;

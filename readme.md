@@ -1,13 +1,10 @@
 # image creator for tar1090
 
-TODO: 
-- Make screen turn black and white
-- Fullscreen with a click on midori?
-
 prequeisites:
 - only works like this on 64 bit ARM because of the cromium restrictions 
-- on ARM 32 bit systems there is no chromium browser available 
-- on x68 systems there ist the  
+  - on ARM 32 bit systems there is no chromium browser available 
+  - on x86 systems the normal chrome installation from puppeteer can be used and no
+  env variables need to be set
 
 install nodejs >18 on debian \
 [nodesource link](https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-22)
