@@ -119,5 +119,7 @@ Test your setup with the command from above, so you don't need to reboot
 ```shell
 sudo runuser -l <username> -c 'cd /opt/tar1090-image && ./runCapture.sh'
 ```
-
+\
+How to jailbreak you Kindle Paperwhite?\
+[here](https://github.com/leorbs/alpine_kindle_homeassistant_dashboard)
 
