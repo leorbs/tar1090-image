@@ -12,6 +12,9 @@ const startBrowser = async () => {
   // Set the viewport size
   await page.setViewport({ width, height });
 
+  // Disable caching
+  await page.setCacheEnabled(false);
+
   await page.goto(tarUrl);
 
   // Function to uncheck a checkbox based on label text
