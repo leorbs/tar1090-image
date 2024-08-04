@@ -21,8 +21,11 @@ Install Node.js >= 18 on Debian/Raspian \
 
 1. Clone this repository into `/opt/`:
    ```shell
-   # Ensure the path is /opt/tar1090-image
-   git clone <repository_url> /opt/tar1090-image
+    # Clone the repository into /opt/tar1090-image
+    sudo git clone https://github.com/leorbs/tar1090-image.git /opt/tar1090-image
+    
+    # Set the ownership to the specified user
+    sudo chown -R <username>:<username> /opt/tar1090-image
    ```
 
 2. Install Chromium:
@@ -32,10 +35,10 @@ Install Node.js >= 18 on Debian/Raspian \
 
 3. Set environment variables and install Puppeteer:
    ```shell
+   cd /opt/tar1090-image
    export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
    export CHROME_PATH=/usr/bin/chromium
    export PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-   cd /opt/tar1090-image
    npm install puppeteer
    chmod +x runCapture.sh
    ```
@@ -49,9 +52,8 @@ Install Node.js >= 18 on Debian/Raspian \
 
 ## Symlinks to HTTP Folder
 
-1. Set permissions and create symlinks:
+1. create symlinks and set permission:
    ```shell
-   sudo chmod 755 /opt/tar1090-image
    sudo ln -sf /opt/tar1090-image/liveimage.html /var/www/html/liveimage.html
    sudo ln -sf /opt/tar1090-image/media/screenshot.png /var/www/html/screenshot.png
    sudo chmod 666 /var/www/html/screenshot.png
