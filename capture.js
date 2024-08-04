@@ -7,12 +7,12 @@ const height = 1024;
 
 const startBrowser = async () => {
   const browser = await puppeteer.launch({
-      args: [
-        '--disk-cache-dir=/dev/null',
-        '--disk-cache-size=1',
-        '--user-data-dir=/dev/null'
-      ]
-});
+    args: [
+      '--disk-cache-dir=/dev/null',
+      '--disk-cache-size=1',
+      '--user-data-dir=/dev/null'
+    ]
+  });
   const page = await browser.newPage();
 
   // Set the viewport size
@@ -21,7 +21,20 @@ const startBrowser = async () => {
   // Disable caching
   await page.setCacheEnabled(false);
 
-  await page.goto(tarUrl);
+  // Function to navigate to the URL with retry mechanism
+  const navigateToUrl = async (url, retries = 3) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+        return;
+      } catch (error) {
+        if (attempt === retries) throw error;
+        console.log(`Retrying navigation, attempt ${attempt}...`);
+      }
+    }
+  };
+
+  await navigateToUrl(tarUrl);
 
   // Function to uncheck a checkbox based on label text
   const uncheckCheckbox = async (labelText) => {
@@ -72,4 +85,6 @@ const run = async () => {
   }, 12 * 60 * 60 * 1000); // 12 hours in milliseconds
 };
 
-run();
+run().catch(error => {
+  console.error('An error occurred:', error);
+});
